@@ -12,10 +12,10 @@ from pyrogram.types import Message
 
 from config import BANNED_USERS
 from strings import get_command
-from YukkiMusic import app
-from YukkiMusic.core.call import Yukki
-from YukkiMusic.utils.database import is_music_playing, music_on
-from YukkiMusic.utils.decorators import AdminRightsCheck
+from AbingMusic import app
+from AbingMusic.core.call import Yukki
+from AbingMusic.utils.database import is_music_playing, music_on
+from AbingMusic.utils.decorators import AdminRightsCheck
 
 # Commands
 RESUME_COMMAND = get_command("RESUME_COMMAND")
