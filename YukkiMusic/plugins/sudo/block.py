@@ -12,10 +12,10 @@ from pyrogram.types import Message
 
 from config import BANNED_USERS
 from strings import get_command
-from YukkiMusic import app
-from YukkiMusic.misc import SUDOERS
-from YukkiMusic.utils.database import add_gban_user, remove_gban_user
-from YukkiMusic.utils.decorators.language import language
+from AbingMusic import app
+from AbingMusic.misc import SUDOERS
+from AbingMusic.utils.database import add_gban_user, remove_gban_user
+from AbingMusic.utils.decorators.language import language
 
 # Command
 BLOCK_COMMAND = get_command("BLOCK_COMMAND")
