@@ -18,7 +18,7 @@ from pyrogram.types import (InlineKeyboardButton,
 
 import config
 from config import MUSIC_BOT_NAME, lyrical
-from YukkiMusic import app
+from AbingMusic import app
 
 from ..utils.formatters import (convert_bytes, get_readable_time,
                                 seconds_to_min)
@@ -173,7 +173,7 @@ class TeleAPI:
                     progress=progress,
                 )
                 await mystic.edit_text(
-                    "Successfully Downloaded.. Processing file now"
+                    "Berhasil Diunduh.. Memproses file sekarang"
                 )
                 downloader.pop(message.message_id)
             except:
