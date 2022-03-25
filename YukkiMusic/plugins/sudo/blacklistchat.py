@@ -12,12 +12,12 @@ from pyrogram.types import Message
 
 from config import BANNED_USERS
 from strings import get_command
-from YukkiMusic import app
-from YukkiMusic.misc import SUDOERS
-from YukkiMusic.utils.database import (blacklist_chat,
+from AbingMusic import app
+from AbingMusic.misc import SUDOERS
+from AbingMusic.utils.database import (blacklist_chat,
                                        blacklisted_chats,
                                        whitelist_chat)
-from YukkiMusic.utils.decorators.language import language
+from AbingMusic.utils.decorators.language import language
 
 # Commands
 
@@ -38,7 +38,7 @@ async def blacklist_chat_func(client, message: Message, _):
     if blacklisted:
         await message.reply_text(_["black_3"])
     else:
-        await message.reply_text("Something wrong happened.")
+        await message.reply_text("Sesuatu yang salah terjadi.")
     try:
         await app.leave_chat(chat_id)
     except:
@@ -56,7 +56,7 @@ async def white_funciton(client, message: Message, _):
     whitelisted = await whitelist_chat(chat_id)
     if whitelisted:
         return await message.reply_text(_["black_6"])
-    await message.reply_text("Something wrong happened.")
+    await message.reply_text("Sesuatu yang salah terjadi.")
 
 
 @app.on_message(
