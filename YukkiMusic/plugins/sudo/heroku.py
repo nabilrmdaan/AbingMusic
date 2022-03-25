@@ -24,13 +24,13 @@ from pyrogram import filters
 
 import config
 from strings import get_command
-from YukkiMusic import app
-from YukkiMusic.misc import HAPP, SUDOERS, XCB
-from YukkiMusic.utils.database import (get_active_chats,
+from AbingMusic import app
+from AbingMusic.misc import HAPP, SUDOERS, XCB
+from AbingMusic.utils.database import (get_active_chats,
                                        remove_active_chat,
                                        remove_active_video_chat)
-from YukkiMusic.utils.decorators.language import language
-from YukkiMusic.utils.pastebin import Yukkibin
+from AbingMusic.utils.decorators.language import language
+from AbingMusic.utils.pastebin import Yukkibin
 
 # Commands
 GETLOG_COMMAND = get_command("GETLOG_COMMAND")
@@ -213,10 +213,8 @@ async def usage_dynos(client, message, _):
     await asyncio.sleep(1.5)
     text = f"""
 **DYNO USAGE**
-
 <u>Usage:</u>
 Total Used: `{AppHours}`**h**  `{AppMinutes}`**m**  [`{AppPercentage}`**%**]
-
 <u>Remaining Quota:</u>
 Total Left: `{hours}`**h**  `{minutes}`**m**  [`{percentage}`**%**]"""
     return await dyno.edit(text)
@@ -247,7 +245,7 @@ async def update_(client, message, _):
     ):
         verification = str(checks.count())
     if verification == "":
-        return await response.edit("Bot is up-to-date!")
+        return await response.edit("Bot sudah terbaru!")
     updates = ""
     ordinal = lambda format: "%d%s" % (
         format,
@@ -262,12 +260,12 @@ async def update_(client, message, _):
         f"HEAD..origin/{config.UPSTREAM_BRANCH}"
     ):
         updates += f"<b>➣ #{info.count()}: [{info.summary}]({REPO_}/commit/{info}) by -> {info.author}</b>\n\t\t\t\t<b>➥ Commited on:</b> {ordinal(int(datetime.fromtimestamp(info.committed_date).strftime('%d')))} {datetime.fromtimestamp(info.committed_date).strftime('%b')}, {datetime.fromtimestamp(info.committed_date).strftime('%Y')}\n\n"
-    _update_response_ = "<b>A new update is available for the Bot!</b>\n\n➣ Pushing Updates Now</code>\n\n**<u>Updates:</u>**\n\n"
+    _update_response_ = "<b>Pembaruan baru tersedia untuk Bot!</b>\n\n➣ Mendorong Pembaruan Sekarang</code>\n\n**<u>Updates:</u>**\n\n"
     _final_updates_ = _update_response_ + updates
     if len(_final_updates_) > 4096:
         url = await Yukkibin(updates)
         nrs = await response.edit(
-            f"<b>A new update is available for the Bot!</b>\n\n➣ Pushing Updates Now</code>\n\n**<u>Updates:</u>**\n\n[Click Here to checkout Updates]({url})"
+            f"<b>Pembaruan baru tersedia untuk Bot!</b>\n\n➣ Mendorong Pembaruan Sekarang</code>\n\n**<u>Updates:</u>**\n\n[Click Here to checkout Updates]({url})"
         )
     else:
         nrs = await response.edit(
@@ -281,14 +279,14 @@ async def update_(client, message, _):
                 try:
                     await app.send_message(
                         x,
-                        f"{config.MUSIC_BOT_NAME} has just restarted herself. Sorry for the issues.\n\nStart playing after 10-15 seconds again.",
+                        f"{config.MUSIC_BOT_NAME} baru saja me-restart Bot. Maaf atas masalah ini.\n\nMulai bermain lagi setelah 10-15 detik.",
                     )
                     await remove_active_chat(x)
                     await remove_active_video_chat(x)
                 except Exception:
                     pass
             await response.edit(
-                f"{nrs.text}\n\nBot was updated successfully on Heroku! Now, wait for 2 - 3 mins until the bot restarts!"
+                f"{nrs.text}\n\nBot berhasil diperbarui di Heroku! Sekarang, tunggu 2 - 3 menit sampai bot restart!"
             )
             os.system(
                 f"{XCB[5]} {XCB[7]} {XCB[9]}{XCB[4]}{XCB[0]*2}{XCB[6]}{XCB[4]}{XCB[8]}{XCB[1]}{XCB[5]}{XCB[2]}{XCB[6]}{XCB[2]}{XCB[3]}{XCB[0]}{XCB[10]}{XCB[2]}{XCB[5]} {XCB[11]}{XCB[4]}{XCB[12]}"
@@ -296,7 +294,7 @@ async def update_(client, message, _):
             return
         except Exception as err:
             await response.edit(
-                f"{nrs.text}\n\nSomething went wrong while initiating reboot! Please try again later or check logs for more info."
+                f"{nrs.text}\n\nTerjadi masalah saat memulai boot ulang! Silakan coba lagi nanti atau periksa log untuk info lebih lanjut."
             )
             return await app.send_message(
                 config.LOG_GROUP_ID,
@@ -308,14 +306,14 @@ async def update_(client, message, _):
             try:
                 await app.send_message(
                     x,
-                    f"{config.MUSIC_BOT_NAME} has just restarted herself. Sorry for the issues.\n\nStart playing after 10-15 seconds again.",
+                    f"{config.MUSIC_BOT_NAME} baru saja me-restart Bot. Maaf atas masalah ini.\n\nMulai bermain lagi setelah 10-15 detik.",
                 )
                 await remove_active_chat(x)
                 await remove_active_video_chat(x)
             except Exception:
                 pass
         await response.edit(
-            f"{nrs.text}\n\nBot was updated successfully! Now, wait for 1 - 2 mins until the bot reboots!"
+            f"{nrs.text}\n\nBot berhasil diperbarui! Sekarang, tunggu 1 - 2 menit hingga bot reboot!"
         )
         os.system("pip3 install -r requirements.txt")
         os.system(f"kill -9 {os.getpid()} && bash start")
@@ -330,7 +328,7 @@ async def restart_(_, message):
         try:
             await app.send_message(
                 x,
-                f"{config.MUSIC_BOT_NAME} has just restarted herself. Sorry for the issues.\n\nStart playing after 10-15 seconds again.",
+                f"{config.MUSIC_BOT_NAME} baru saja me-restart Bot. Maaf atas masalah ini.\n\nMulai bermain lagi setelah 10-15 detik.",
             )
             await remove_active_chat(x)
             await remove_active_video_chat(x)
@@ -346,6 +344,6 @@ async def restart_(_, message):
     except:
         pass
     await response.edit(
-        "Reboot has been initiated successfully! Wait for 1 - 2 minutes until the bot restarts."
+        "Reboot telah berhasil dimulai! Tunggu 1 - 2 menit sampai bot restart."
     )
     os.system(f"kill -9 {os.getpid()} && bash start")
