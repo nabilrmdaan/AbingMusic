@@ -7,7 +7,7 @@
 #
 # All rights reserved.
 
-from AbingMusic.core.bot import YukkiBot
+from AbingMusic.core.bot import AbingBot
 from AbingMusic.core.dir import dirr
 from AbingMusic.core.git import git
 from AbingMusic.core.userbot import Userbot
