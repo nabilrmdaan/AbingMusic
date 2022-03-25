@@ -14,7 +14,7 @@ import heroku3
 from pyrogram import filters
 
 import config
-from YukkiMusic.core.mongo import pymongodb
+from AbingMusic.core.mongo import pymongodb
 
 from .logging import LOGGER
 
@@ -86,5 +86,5 @@ def heroku():
                 LOGGER(__name__).info(f"Heroku App Configured")
             except BaseException:
                 LOGGER(__name__).warning(
-                    f"Please make sure your Heroku API Key and Your App name are configured correctly in the heroku."
+                    f"Pastikan Heroku API Key dan nama Aplikasi Anda dikonfigurasi dengan benar di heroku."
                 )
