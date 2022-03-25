@@ -1,3 +1,4 @@
+
 #
 # Copyright (C) 2021-2022 by TeamYukki@Github, < https://github.com/TeamYukki >.
 #
@@ -7,60 +8,71 @@
 #
 # All rights reserved.
 
+from pyrogram import filters
+from pyrogram.types import Message
 
-from strings import get_string
+from strings import get_command
+from AbingMusic import app
 from AbingMusic.misc import SUDOERS
-from AbingMusic.utils.database import (get_lang, is_commanddelete_on,
-                                       is_maintenance)
+from AbingMusic.utils.database.memorydatabase import (
+    get_active_chats, get_active_video_chats)
+
+# Commands
+ACTIVEVC_COMMAND = get_command("ACTIVEVC_COMMAND")
+ACTIVEVIDEO_COMMAND = get_command("ACTIVEVIDEO_COMMAND")
 
 
-def language(mystic):
-    async def wrapper(_, message, **kwargs):
-        if await is_maintenance() is False:
-            if message.from_user.id not in SUDOERS:
-                return await message.reply_text(
-                    "Bot sedang dalam pemeliharaan. Harap tunggu beberapa saat..."
-                )
-        if await is_commanddelete_on(message.chat.id):
-            try:
-                await message.delete()
-            except:
-                pass
+@app.on_message(filters.command(ACTIVEVC_COMMAND) & SUDOERS)
+async def activevc(_, message: Message):
+    mystic = await message.reply_text(
+        "Mendapatkan obrolan suara aktif.. Harap tunngu"
+    )
+    served_chats = await get_active_chats()
+    text = ""
+    j = 0
+    for x in served_chats:
         try:
-            language = await get_lang(message.chat.id)
-            language = get_string(language)
-        except:
-            language = get_string("en")
-        return await mystic(_, message, language)
+            title = (await app.get_chat(x)).title
+        except Exception:
+            title = "Private Group"
+        if (await app.get_chat(x)).username:
+            user = (await app.get_chat(x)).username
+            text += f"<b>{j + 1}.</b>  [{title}](https://t.me/{user})[`{x}`]\n"
+        else:
+            text += f"<b>{j + 1}. {title}</b> [`{x}`]\n"
+        j += 1
+    if not text:
+        await mystic.edit_text("Tidak Ada Obrolan Suara Aktif")
+    else:
+        await mystic.edit_text(
+            f"**Obrolan Suara Aktif:-**\n\n{text}",
+            disable_web_page_preview=True,
+        )
 
-    return wrapper
 
-
-def languageCB(mystic):
-    async def wrapper(_, CallbackQuery, **kwargs):
-        if await is_maintenance() is False:
-            if CallbackQuery.from_user.id not in SUDOERS:
-                return await CallbackQuery.answer(
-                    "Bot sedang dalam pemeliharaan. Harap tunggu beberapa saat...",
-                    show_alert=True,
-                )
+@app.on_message(filters.command(ACTIVEVIDEO_COMMAND) & SUDOERS)
+async def activevi_(_, message: Message):
+    mystic = await message.reply_text(
+        "Mendapatkan obrolan video aktif.. Harap tunggu"
+    )
+    served_chats = await get_active_video_chats()
+    text = ""
+    j = 0
+    for x in served_chats:
         try:
-            language = await get_lang(CallbackQuery.message.chat.id)
-            language = get_string(language)
-        except:
-            language = get_string("en")
-        return await mystic(_, CallbackQuery, language)
-
-    return wrapper
-
-
-def LanguageStart(mystic):
-    async def wrapper(_, message, **kwargs):
-        try:
-            language = await get_lang(message.chat.id)
-            language = get_string(language)
-        except:
-            language = get_string("en")
-        return await mystic(_, message, language)
-
-    return wrapper
+            title = (await app.get_chat(x)).title
+        except Exception:
+            title = "Private Group"
+        if (await app.get_chat(x)).username:
+            user = (await app.get_chat(x)).username
+            text += f"<b>{j + 1}.</b>  [{title}](https://t.me/{user})[`{x}`]\n"
+        else:
+            text += f"<b>{j + 1}. {title}</b> [`{x}`]\n"
+        j += 1
+    if not text:
+        await mystic.edit_text("Tidak Ada Obrolan Suara Aktif")
+    else:
+        await mystic.edit_text(
+            f"**Panggilan Video Aktif:-**\n\n{text}",
+            disable_web_page_preview=True,
+        )
