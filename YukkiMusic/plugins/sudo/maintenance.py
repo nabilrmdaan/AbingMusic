@@ -11,12 +11,12 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from strings import get_command, get_string
-from YukkiMusic import app
-from YukkiMusic.misc import SUDOERS
-from YukkiMusic.utils.database import (get_lang, is_maintenance,
+from AbingMusic import app
+from AbingMusic.misc import SUDOERS
+from AbingMusic.utils.database import (get_lang, is_maintenance,
                                        maintenance_off,
                                        maintenance_on)
-from YukkiMusic.utils.decorators.language import language
+from AbingMusic.utils.decorators.language import language
 
 # Commands
 MAINTENANCE_COMMAND = get_command("MAINTENANCE_COMMAND")
@@ -38,7 +38,7 @@ async def maintenance(client, message: Message):
     if state == "enable":
         if await is_maintenance() is False:
             await message.reply_text(
-                "Maintenance mode is already enabled"
+                "Mode pemeliharaan sudah diaktifkan"
             )
         else:
             await maintenance_on()
@@ -49,7 +49,7 @@ async def maintenance(client, message: Message):
             await message.reply_text(_["maint_3"])
         else:
             await message.reply_text(
-                "Maintenance mode is already disabled"
+                "Mode pemeliharaan tidak di Aktifkan"
             )
     else:
         await message.reply_text(usage)
