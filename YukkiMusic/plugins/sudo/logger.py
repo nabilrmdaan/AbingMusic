@@ -11,10 +11,10 @@ from pyrogram import filters
 
 import config
 from strings import get_command
-from YukkiMusic import app
-from YukkiMusic.misc import SUDOERS
-from YukkiMusic.utils.database import add_off, add_on
-from YukkiMusic.utils.decorators.language import language
+from AbingMusic import app
+from AbingMusic.misc import SUDOERS
+from AbingMusic.utils.database import add_off, add_on
+from AbingMusic.utils.decorators.language import language
 
 # Commands
 LOGGER_COMMAND = get_command("LOGGER_COMMAND")
